@@ -4,6 +4,5 @@ FROM ubuntu:16.04
 # Update the repository sources list
 RUN apt-get update
 
-# Install firefox
-RUN apt-get install -y firefox
-RUN useradd -u 1000 magland
+# Install gedit
+RUN apt-get install -y gedit
