@@ -1,0 +1,19 @@
+#!/bin/bash
+
+sudo docker build -t dockabox .
+
+args="$@ --net=host --pid=host"
+
+args="$args --rm -e DISPLAY=$DISPLAY"
+
+useradd_cmd="mkdir /home/$USER; useradd -d /home/$USER -u $UID $USER"
+
+#Here's an example of making the home directory available
+#args="$args -v $HOME:/home/$USER"
+
+args="$args -v /tmp/.X11-unix:/tmp/.X11-unix"
+
+args="$args -it dockabox /bin/bash -c '$useradd_cmd; su - magland -c '/bin/bash''"
+
+echo sudo docker run $args
+/bin/bash -c "sudo docker run $args"
